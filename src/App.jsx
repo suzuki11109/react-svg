@@ -17,19 +17,21 @@ class App extends Component {
 
   render() {
     let { elements, elementSelection } = this.props.state;
+    let rotateHandle = elementSelection.rotateHandle;
     return <div>
       <svg onMouseMove={this.onMouseMoveHandle} width={500}height={500}
         onMouseUp={this.onMouseUpHandle}>
         {renderElements(elements)}
         {createElementSelection(elementSelection, this.onMouseDownHandle)}
+        <rect x={rotateHandle.x} y={rotateHandle.y} width={10} height={10} fill={'yellow'} />
       </svg>
       </div>;
   }
 }
 
 function renderElements(elements) {
-  return elements.map(element => {
-    return <rect x={element.x} y={element.y} width={element.width} height={element.height} fill={element.fill} />;
+  return elements.map((element) => {
+    return <rect x={element.x} y={element.y} width={element.width} height={element.height} fill={'red'} />;
   });
 }
 
