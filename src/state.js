@@ -42,8 +42,8 @@ export class RHandle {
   @observable y = 0;
 
   move(e, element) {
-    let pageX = e.pageX;
-    element.width = pageX - element.x;
+    var dragx = Math.max(element.x + (10 / 2), Math.min(500, e.pageX));
+    element.width = dragx - element.x;
   }
 
   setPosition(element) {
@@ -77,8 +77,12 @@ export class TrHandle {
   @observable y = 0;
 
   move(e, element) {
-    let pageX = e.pageX;
-    element.width = pageX - element.x;
+    var dragx = Math.max(element.x + (10 / 2), Math.min(500, e.pageX));
+    element.width = dragx - element.x;
+
+    let oldy = element.y;
+    element.y = Math.max(0, Math.min(element.y + element.height - (10 / 2), e.pageY));
+    element.height += (oldy - element.y);
   }
 
   setPosition(element) {
@@ -87,6 +91,51 @@ export class TrHandle {
   }
 }
 
+export class TlHandle {
+  @observable width = 10;
+  @observable height = 10;
+  @observable x = 0;
+  @observable y = 0;
+
+
+  move(e, element) {
+    var oldx = element.x;
+    element.x = Math.max(0, Math.min(element.x + element.width - (10 / 2), e.pageX));
+    element.width += (oldx - element.x);
+
+    let oldy = element.y;
+    element.y = Math.max(0, Math.min(element.y + element.height - (10 / 2), e.pageY));
+    element.height += (oldy - element.y);
+  }
+
+  setPosition(element) {
+    this.x = element.x - (10 / 2);
+    this.y = element.y - (10 / 2);
+  }
+}
+
+export class BlHandle {
+  @observable width = 10;
+  @observable height = 10;
+  @observable x = 0;
+  @observable y = 0;
+
+  move(e, element) {
+    var oldx = element.x;
+    element.x = Math.max(0, Math.min(element.x + element.width - (10 / 2), e.pageX));
+
+    element.width += (oldx - element.x);
+    var dragy = Math.max(element.y + (10 / 2), Math.min(500, e.pageY));
+    element.height = dragy - element.y;
+  }
+
+  setPosition(element) {
+    this.x = element.x - (10 / 2);
+    this.y = element.y + element.height - (10 / 2);
+  }
+}
+
+
 export class BrHandle {
   @observable width = 10;
   @observable height = 10;
@@ -94,7 +143,11 @@ export class BrHandle {
   @observable y = 0;
 
   move(e, element) {
+    var dragx = Math.max(element.x + (10 / 2), Math.min(500, e.pageX));
+    element.width = dragx - element.x;
 
+    var dragy = Math.max(element.y + (10 / 2), Math.min(500, e.pageY));
+    element.height = dragy - element.y;
   }
 
   setPosition(element) {
@@ -116,8 +169,10 @@ export class ElementSelection {
       new BHandle(),
       new RHandle(),
       new LHandle(),
-      // new TrHandle(),
-      // new BrHandle(),
+      new TrHandle(),
+      new BrHandle(),
+      new TlHandle(),
+      new BlHandle(),
     ];
     this.element = element;
   }
