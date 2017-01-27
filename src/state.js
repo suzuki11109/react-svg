@@ -11,8 +11,11 @@ export class RotateHandle {
   move(e, element) {
     let cx = element.x + (element.width / 2);
     let cy = element.y + (element.height / 2);
+    let mx = e.nativeEvent.offsetX;
+    let my = e.nativeEvent.offsetY;
 
-    let rad = Math.atan2(e.pageX - cx, cy - e.pageY);
+    let rad = Math.atan2(mx - cx, cy - my);
+
     let deg = (rad * (180 / Math.PI));
 
     element.transform = `rotate(${deg}, ${cx}, ${cy})`;

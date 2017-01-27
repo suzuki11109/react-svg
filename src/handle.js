@@ -10,7 +10,7 @@ class Handle {
 export class THandle extends Handle {
   move(e, element) {
     let oldy = element.y;
-    element.y = Math.max(0, Math.min(element.y + element.height - (10 / 2), e.pageY));
+    element.y = Math.max(0, Math.min(element.y + element.height - (10 / 2), e.nativeEvent.offsetY));
     element.height += (oldy - element.y);
   }
 
@@ -22,7 +22,7 @@ export class THandle extends Handle {
 
 export class BHandle  extends Handle {
   move(e, element) {
-    var dragy = Math.max(element.y + (10 / 2), Math.min(500, e.pageY));
+    var dragy = Math.max(element.y + (10 / 2), Math.min(500, e.nativeEvent.offsetY));
     element.height = dragy - element.y;
   }
 
@@ -39,7 +39,7 @@ export class RHandle  extends Handle {
   @observable y = 0;
 
   move(e, element) {
-    var dragx = Math.max(element.x + (10 / 2), Math.min(500, e.pageX));
+    var dragx = Math.max(element.x + (10 / 2), Math.min(500, e.nativeEvent.offsetX));
     element.width = dragx - element.x;
   }
 
@@ -52,7 +52,7 @@ export class RHandle  extends Handle {
 export class LHandle  extends Handle {
   move(e, element) {
     var oldx = element.x;
-    element.x = Math.max(0, Math.min(element.x + element.width - (10 / 2), e.pageX));
+    element.x = Math.max(0, Math.min(element.x + element.width - (10 / 2), e.nativeEvent.offsetX));
     element.width += (oldx - element.x);
   }
 
@@ -64,11 +64,11 @@ export class LHandle  extends Handle {
 
 export class TrHandle  extends Handle {
   move(e, element) {
-    var dragx = Math.max(element.x + (10 / 2), Math.min(500, e.pageX));
+    var dragx = Math.max(element.x + (10 / 2), Math.min(500, e.nativeEvent.offsetX));
     element.width = dragx - element.x;
 
     let oldy = element.y;
-    element.y = Math.max(0, Math.min(element.y + element.height - (10 / 2), e.pageY));
+    element.y = Math.max(0, Math.min(element.y + element.height - (10 / 2), e.nativeEvent.offsetY));
     element.height += (oldy - element.y);
   }
 
@@ -81,11 +81,11 @@ export class TrHandle  extends Handle {
 export class TlHandle  extends Handle {
   move(e, element) {
     var oldx = element.x;
-    element.x = Math.max(0, Math.min(element.x + element.width - (10 / 2), e.pageX));
+    element.x = Math.max(0, Math.min(element.x + element.width - (10 / 2), e.nativeEvent.offsetX));
     element.width += (oldx - element.x);
 
     let oldy = element.y;
-    element.y = Math.max(0, Math.min(element.y + element.height - (10 / 2), e.pageY));
+    element.y = Math.max(0, Math.min(element.y + element.height - (10 / 2), e.nativeEvent.offsetY));
     element.height += (oldy - element.y);
   }
 
@@ -98,10 +98,10 @@ export class TlHandle  extends Handle {
 export class BlHandle  extends Handle {
   move(e, element) {
     var oldx = element.x;
-    element.x = Math.max(0, Math.min(element.x + element.width - (10 / 2), e.pageX));
+    element.x = Math.max(0, Math.min(element.x + element.width - (10 / 2), e.nativeEvent.offsetX));
 
     element.width += (oldx - element.x);
-    var dragy = Math.max(element.y + (10 / 2), Math.min(500, e.pageY));
+    var dragy = Math.max(element.y + (10 / 2), Math.min(500, e.nativeEvent.offsetY));
     element.height = dragy - element.y;
   }
 
@@ -114,10 +114,10 @@ export class BlHandle  extends Handle {
 
 export class BrHandle  extends Handle {
   move(e, element) {
-    var dragx = Math.max(element.x + (10 / 2), Math.min(500, e.pageX));
+    var dragx = Math.max(element.x + (10 / 2), Math.min(500, e.nativeEvent.offsetX));
     element.width = dragx - element.x;
 
-    var dragy = Math.max(element.y + (10 / 2), Math.min(500, e.pageY));
+    var dragy = Math.max(element.y + (10 / 2), Math.min(500, e.nativeEvent.offsetY));
     element.height = dragy - element.y;
   }
 

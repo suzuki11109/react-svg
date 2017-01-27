@@ -21,7 +21,7 @@ class App extends Component {
 
   render() {
     let { elements, elementSelection } = this.props.state;
-    return <div>
+    return <div style={{marginLeft: 100}}>
       <svg onMouseMove={this.onMouseMoveHandle} width={500} height={500}
         onMouseUp={this.onMouseUpHandle}>
         {renderElements(elements, this.onClickElement)}
