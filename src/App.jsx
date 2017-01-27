@@ -16,16 +16,21 @@ class App extends Component {
   }
 
   render() {
-    let { aRect, elementSelection } = this.props.state;
+    let { elements, elementSelection } = this.props.state;
     return <div>
-      <svg onMouseMove={this.onMouseMoveHandle} height={500}
+      <svg onMouseMove={this.onMouseMoveHandle} width={500}height={500}
         onMouseUp={this.onMouseUpHandle}>
-
-        <rect x={aRect.x} y={aRect.y} width={aRect.width} height={aRect.height} fill="red" />
+        {renderElements(elements)}
         {createElementSelection(elementSelection, this.onMouseDownHandle)}
       </svg>
       </div>;
   }
+}
+
+function renderElements(elements) {
+  return elements.map(element => {
+    return <rect x={element.x} y={element.y} width={element.width} height={element.height} fill={element.fill} />;
+  });
 }
 
 function createElementSelection(elementSelection, onMouseDownHandle) {
