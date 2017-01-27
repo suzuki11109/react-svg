@@ -6,6 +6,17 @@ export class RotateHandle {
   height = 10;
   x = 0;
   y = 0;
+  fill = 'yellow';
+
+  move(e, element) {
+    let cx = element.x + (element.width / 2);
+    let cy = element.y + (element.height / 2);
+
+    let rad = Math.atan2(e.pageX - cx, cy - e.pageY);
+    let deg = (rad * (180 / Math.PI));
+
+    element.transform = `rotate(${deg}, ${cx}, ${cy})`;
+  }
 
   setPosition(element) {
     this.x = element.x + (element.width / 2);
@@ -14,7 +25,6 @@ export class RotateHandle {
 }
 
 export class ElementSelection {
-  @observable rotateHandle;
   @observable handles = [];
   @observable element;
 
@@ -30,16 +40,15 @@ export class ElementSelection {
       new TrHandle(),
       new BrHandle(),
       new TlHandle(),
-      new BlHandle()
+      new BlHandle(),
+      new RotateHandle()
     ];
-    this.rotateHandle = new RotateHandle();
     this.element = element;
   }
 
   setPositionOnElement() {
     if (this.element) {
       this.handles.forEach(handle => handle.setPosition(this.element));
-      this.rotateHandle.setPosition(this.element);
     }
   }
 }
@@ -52,10 +61,10 @@ export class State {
 
   constructor() {
     let rect = {
-      x: 50, y: 50, width: 100, height: 100, fill: 'red'
+      x: 50, y: 50, width: 100, height: 100, fill: 'red', transform: ''
     };
     this.elements.push(rect);
-    this.selectElement(this.elements[0]);
+    // this.selectElement(this.elements[0]);
   }
 
   selectElement(element) {
